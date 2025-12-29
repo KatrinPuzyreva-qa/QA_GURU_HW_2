@@ -16,10 +16,13 @@ def test_open_selenium(browser):
     assert browser.current_url == url, f'URL страницы отличается от ожидаемого: {browser.current_url}'
 
 
+@pytest.mark.github
+def test_open_github(browser):
+    url = 'https://github.com/'
+    browser.get(url)
 
+    expected_title = 'GitHub · Change is constant. GitHub keeps you ahead. · GitHub'
+    actual_title = browser.title.strip()  # Избавляемся от возможных пробелов
 
-def test_selenium_web(driver):
-    url = "https://www.selenium.dev/"
-    driver.get(url)
-    assert driver.title == "Selenium"
-    assert driver.current_url == url
+    assert actual_title == expected_title, f'Заголовок страницы отличается от ожидаемого: {actual_title}'
+    assert browser.current_url == url, f'URL страницы отличается от ожидаемого: {browser.current_url}'
